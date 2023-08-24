@@ -14,6 +14,7 @@ seconds: document.querySelector('[data-seconds]'),
 const currentDate = new Date();
 refs.startBtn.disabled = true;
 
+
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -23,11 +24,11 @@ const options = {
       if (selectedDates[0] <= currentDate) {
           Notiflix.Notify.failure('Please choose a date in the future');
         refs.startBtn.disabled = true;
-        refs.startBtn.classList.add('button_error');
+        refs.startBtn.classList.remove('button_active');
         
       } else {
         refs.startBtn.disabled = false;
-        refs.startBtn.classList.remove('button_error');
+        refs.startBtn.classList.add('button_active');
     };
   },
 };
@@ -37,7 +38,10 @@ let intervalTime;
 
 refs.startBtn.addEventListener('click', () => {
     intervalTime = setInterval(updateTimer, 1000);
-    refs.startBtn.disabled = true;
+  refs.startBtn.disabled = true;
+  refs.timePicker.disabled = true;
+    refs.startBtn.classList.remove('button_active');
+    refs.timePicker.classList.add('datetime-picker-off');
 });
 
 function updateTimer() {

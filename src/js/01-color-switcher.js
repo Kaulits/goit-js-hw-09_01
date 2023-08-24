@@ -10,6 +10,7 @@ const refs = {
 }
 
 let colorSwitch;
+refs.stopBtn.disabled = true;
 
 
 refs.startBtn.addEventListener('click', startBtnClick);
@@ -17,6 +18,7 @@ refs.stopBtn.addEventListener('click', stopBtnClick);
 
 function startBtnClick() {
     refs.startBtn.disabled = true;
+    refs.stopBtn.disabled = false;
     colorSwitch = setInterval(() => {
         refs.bodyEl.style.backgroundColor = getRandomHexColor();
     }, 1000)
@@ -24,5 +26,6 @@ function startBtnClick() {
 
 function stopBtnClick() {
     refs.startBtn.disabled = false;
+    refs.stopBtn.disabled = true;
     clearInterval(colorSwitch);
 };

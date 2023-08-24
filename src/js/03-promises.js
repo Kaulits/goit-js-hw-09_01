@@ -1,45 +1,39 @@
 import Notiflix from 'notiflix';
 
+const refs = {
+  form: document.querySelector('.form'),
+  delay: document.querySelector('[name="delay"]'),
+  step: document.querySelector('[name="step"]'),
+  amount: document.querySelector('[name="amount"]'),
+};
 
-const form = document.querySelector('.form');
-
-form.addEventListener('submit', onFormSubmit);
-
-
+refs.form.addEventListener('submit', onFormSubmit);
 
 function createPromise(position, delay) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const shouldResolve = Math.random() > 0.3;
-      
-      if (shouldResolve) {
-        resolve({ position, delay });
-      } else {
-        reject({ position, delay });
-      }
-    }, delay);
-});
+  const shouldResolve = Math.random() > 0.3;
+ return new Promise((resolve, reject) => {
+    if (shouldResolve) {
+      resolve(Notiflix.Notify.success(`Fulfilled promise ${position} in ${delay}`));
+    } else {
+      reject(Notiflix.Notify.failure(`Rejected promise ${position} in ${delay}`));
+    }
+  });
+
 }
+
 
 function onFormSubmit(e) {
   e.preventDefault();
-  
-  const formData = new FormData(form);
+  const amount = Number(refs.amount.value);
+  const delay = Number(refs.delay.value);
+  const step = Number(refs.step.value);
 
- const delay = Number(formData.get('delay'));
-  const step = Number(formData.get('step'));
-  const amount = Number(formData.get('amount'));
-
-  // clearResults();
-
-  for (let i = 0; i < amount; i++) {
-    const totalDelay = delay + i * step;
-       createPromise(i + 1, totalDelay)
-      .then(({ position, totalDelay }) => {
-        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-      })
-      .catch(({ position, totalDelay }) => {
-        Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-      });
+  for (let i = 1; i <= amount; i++) {
+    let totalDelay = delay + step * (i - 1);
+    setTimeout(() => {
+      createPromise(i, totalDelay);
+    }, totalDelay);
   }
-};
+  refs.form.reset();
+}
+
