@@ -63,15 +63,25 @@ background-color: #740404;
 border: none;
   color: white;
     transition: 0.25s;
+    cursor: pointer;
 }
 
 .button:hover {
- 
-  cursor: pointer;
       box-shadow: inset 0 0 0 2em #2e0000;
 }
 
 .field {
   color: rgb(53, 3, 3);
   font-size: 25px;
+}
+
+.button_error {
+  cursor: not-allowed;
+  background-color: #918d8d;
+    border: none;
+    color: rgb(255, 255, 255);
+}
+
+.button_error:hover {
+  box-shadow: inset 0 0 0 2em #858383;
 }

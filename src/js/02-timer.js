@@ -22,9 +22,12 @@ const options = {
   onClose(selectedDates) {
       if (selectedDates[0] <= currentDate) {
           Notiflix.Notify.failure('Please choose a date in the future');
-           refs.startBtn.disabled = true;
+        refs.startBtn.disabled = true;
+        refs.startBtn.classList.add('button_error');
+        
       } else {
-          refs.startBtn.disabled = false;
+        refs.startBtn.disabled = false;
+        refs.startBtn.classList.remove('button_error');
     };
   },
 };
