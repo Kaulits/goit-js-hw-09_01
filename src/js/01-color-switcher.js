@@ -16,13 +16,13 @@ refs.startBtn.addEventListener('click', startBtnClick);
 refs.stopBtn.addEventListener('click', stopBtnClick);
 
 function startBtnClick() {
-    refs.startBtn.disable = true;
+    refs.startBtn.disabled = true;
     colorSwitch = setInterval(() => {
         refs.bodyEl.style.backgroundColor = getRandomHexColor();
     }, 1000)
 };
 
 function stopBtnClick() {
-    refs.startBtn.disable = false;
+    refs.startBtn.disabled = false;
     clearInterval(colorSwitch);
 };
